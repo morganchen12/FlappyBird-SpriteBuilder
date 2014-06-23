@@ -48,21 +48,7 @@
         ground.physicsBody.collisionType = @"level";
         ground.zOrder = DrawingOrderGround;
     }
-    
-    for (CCNode *cloud in _clouds){
-        cloud.position = ccp(cloud.position.x - (character.physicsBody.velocity.x * delta), cloud.position.y);
-        if(cloud.position.x <= -1 * cloud.contentSize.width){
-            cloud.position = ccp(cloud.position.x + 2*cloud.contentSize.width, cloud.position.y);
-        }
-    }
-    
-    for (CCNode *bush in _bushes){
-        bush.position = ccp(bush.position.x - (character.physicsBody.velocity.x * delta), bush.position.y);
-        if(bush.position.x <= -1 * bush.contentSize.width){
-            bush.position = ccp(bush.position.x + 2*bush.contentSize.width, bush.position.y);
-        }
-    }
-    
+
     // set this class as delegate
     physicsNode.collisionDelegate = self;
     
@@ -140,6 +126,20 @@
 
 - (void)update:(CCTime)delta
 {
+    for (CCNode *cloud in _clouds){
+        cloud.position = ccp(cloud.position.x - (character.physicsBody.velocity.x * delta), cloud.position.y);
+        if(cloud.position.x <= -1 * cloud.contentSize.width){
+            cloud.position = ccp(cloud.position.x + 2*cloud.contentSize.width, cloud.position.y);
+        }
+    }
+    
+    for (CCNode *bush in _bushes){
+        bush.position = ccp(bush.position.x - (character.physicsBody.velocity.x * delta), bush.position.y);
+        if(bush.position.x <= -1 * bush.contentSize.width){
+            bush.position = ccp(bush.position.x + 2*bush.contentSize.width, bush.position.y);
+        }
+    }
+    
     _sinceTouch += delta;
     
     character.rotation = clampf(character.rotation, -30.f, 90.f);
